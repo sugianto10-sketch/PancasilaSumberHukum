@@ -330,7 +330,7 @@ function renderMenu(){
  var m=sm(ST),idn=ST.n.trim()&&ST.k.trim(),rf=ST.ref&&ST.ref.e&&((ST.ref.a||'')+(ST.ref.b||'')).trim().length>=5,all=idn&&m.ln===6&&m.q===10&&rf,f=ST.fb;
  var row=function(ok,t){return '<div class="stt">'+(ok?'✅':'⬜')+' '+t+'</div>'};
  $('cs').innerHTML='<div class="box"><h3>🎓 Sertifikat</h3>'+row(idn,'Nama dan kelas terisi')+row(m.ln===6,'Lembar kerja selesai ('+m.ln+'/6)')+row(m.q===10,'Evaluasi selesai ('+m.q+'/10)'+(m.q===10?' — nilai '+m.sc:''))+row(rf,'Refleksi terisi')+'<button class="act" '+(all?'':'disabled style="opacity:.45"')+' onclick="mkCert()">Buat &amp; Unduh Sertifikat</button><div class="msg" id="mc"></div><img id="cimg" style="display:none;width:100%;margin-top:10px;border-radius:8px" alt="Sertifikat"></div>'
- +'<div class="box"><h3>☁️ Pengiriman ke Guru</h3><p style="font-size:.95rem">'+(DB&&UID?'Terhubung. Hasil belajarmu otomatis terkirim ke guru.':'Belum terhubung ke guru. Pastikan kamu online dan membuka aplikasi lewat tautan dari guru (sudah masuk akun).')+'</p>'+row(!!ST.sent.l,'LKPD sudah dikirim')+row(!!ST.sent.r,'Refleksi sudah dikirim')+'</div>'
+ +'<div class="box"><h3>☁️ Pengiriman ke Guru</h3><p style="font-size:.95rem">'+((GAS||DB&&UID)?'Terhubung. Hasil belajarmu otomatis terkirim ke guru.':'Belum terhubung ke guru. Pastikan kamu sudah login, online, dan membuka lewat tautan dari guru (akses Kontributor).')+'</p>'+row(!!ST.sent.l,'LKPD sudah dikirim')+row(!!ST.sent.r,'Refleksi sudah dikirim')+'</div>'
  +'<div class="box"><h3>💬 Umpan Balik Guru</h3>'+(f&&f.u?'<div class="fbk">'+esc(f.u)+'</div>':'<p style="font-size:.95rem">Belum ada umpan balik umum dari guru. Umpan balik per lembar kerja dan per soal akan muncul langsung di bawahnya.</p>')+'</div>'}
 function hs(s){var a=7;for(var i=0;i<s.length;i++)a=(a*31+s.charCodeAt(i))>>>0;return a.toString(36).toUpperCase()}
 async function mkCert(){
@@ -350,12 +350,13 @@ async function mkCert(){
  c.toBlob(async function(b){var r=await dlSave('Sertifikat_'+nm.replace(/\s+/g,'_')+'.png',b);fb('mc',r!==2,r===1?'✅ Sertifikat siap disimpan.':r===2?'Unduhan dibatalkan. Tekan tombol lagi untuk mencoba.':'Tekan dan tahan gambar sertifikat, lalu simpan ke galeri.')},'image/png')}
 /* DASHBOARD GURU (tersembunyi: ketuk tulisan nama sekolah di cover 5 kali) */
 /* SINKRON OTOMATIS (butuh viewer login) */
-var DB=null,UID=null,GL={},GU={},LST=[],GV='',SYNC=0,ED=false,lastJ='',stm;
+var GAS='https://script.google.com/macros/s/AKfycbyqbxGOOXRRxPgieXof82-KeU9hduxycovOwq2QTbLX6uFif0oq6RBCkHOExGTRlbnC/exec';/* tempel URL Web App Google Apps Script di sini */
+var GP='',DB=null,UID=null,GL={},GU={},LST=[],GV='',SYNC=0,ED=false,lastJ='',stm;
 function K(o,f){var r={};for(var k in o||{})r[f(k)]=o[k];return r}
-async function push(){await READY;if(!DB||!UID||!ST.n.trim()||!ST.k.trim())return false;var td=dstr(Date.now());ST.hw=ST.hw||{};if(!ST.hw[td]){ST.hw[td]=Date.now();try{localStorage.setItem('pnc_st',JSON.stringify(ST))}catch(e){}}var o={n:ST.n.trim(),k:ST.k.trim(),hw:ST.hw,in:K(ST.in,function(k){return k.replace('.','_')}),r:ST.r,qz:ST.qz,qw:ST.qw,ref:ST.ref||{},sl:ST.sent.l||0,sr:ST.sent.r||0},j=JSON.stringify(o);if(j===lastJ)return true;try{o.t=Date.now();await DB.doc('siswa/'+UID).set(o);lastJ=j;SYNC=1;return true}catch(e){SYNC=0;return false}}
+async function push(){await READY;if(!(GAS||(DB&&UID))||!ST.n.trim()||!ST.k.trim())return false;var td=dstr(Date.now());ST.hw=ST.hw||{};if(!ST.hw[td]){ST.hw[td]=Date.now();try{localStorage.setItem('pnc_st',JSON.stringify(ST))}catch(e){}}var o={n:ST.n.trim(),k:ST.k.trim(),hw:ST.hw,in:K(ST.in,function(k){return k.replace('.','_')}),r:ST.r,qz:ST.qz,qw:ST.qw,ref:ST.ref||{},sl:ST.sent.l||0,sr:ST.sent.r||0},j=JSON.stringify(o);if(j===lastJ)return true;try{o.t=Date.now();if(GAS)await gpost({a:'save',key:gkey(),d:o});else await DB.doc('siswa/'+UID).set(o);lastJ=j;SYNC=1;return true}catch(e){SYNC=0;return false}}
 function syncUp(){clearTimeout(stm);stm=setTimeout(push,1500)}
 var READY=
-(async function(){try{if(!window.claude)return;var d=await claude.use('db'),U=await claude.use('user');if(!d||!U)return;var id=await U.id();if(!id)return;DB=d;UID=id;
+(async function(){try{if(GAS||!window.claude)return;var d=await claude.use('db'),U=await claude.use('user');if(!d||!U)return;var id=await U.id();if(!id)return;DB=d;UID=id;
  DB.doc('umpan/'+UID).onSnapshot(function(s){if(s.exists){var x=s.data();ST.fb=x.fb||null;ST.g=x.g||'';try{localStorage.setItem('pnc_st',JSON.stringify(ST))}catch(e){}showFb();if(S[cur].id==='mn')renderMenu()}},function(){});
  ED=await U.canEdit();
  if(ED){DB.collection('siswa').onSnapshot(function(q){GL={};q.docs.forEach(function(x){GL[x.id]=x.data()});if(GV==='main'&&$('gd').style.display==='block'){var ae=document.activeElement;if(ae&&ae.id&&ae.id.indexOf('ab')===0)abRender();else gdMain()}},function(){});DB.collection('umpan').onSnapshot(function(q){GU={};q.docs.forEach(function(x){GU[x.id]=x.data()})},function(){})}
@@ -366,7 +367,7 @@ function G(){try{return JSON.parse(localStorage.getItem('pnc_guru'))||{nm:'',nip
 function Gs(t){try{localStorage.setItem('pnc_guru',JSON.stringify(t))}catch(e){}}
 function gd(h){var g=$('gd');g.style.display='block';g.innerHTML='<div class="gdi">'+h+'</div>';g.scrollTop=0}
 function gdX(){$('gd').style.display='none';GV=''}
-function gdLogin(){gd('<h2 class="t">🔒 Dashboard Guru</h2><div class="box"><input type="password" id="gp" placeholder="PIN guru"><button class="act" onclick="if($(\'gp\').value===PIN)gdMain();else $(\'gm\').textContent=\'PIN salah\'">Masuk</button><button class="act g" onclick="gdX()">Batal</button><p id="gm" style="color:var(--no)"></p></div>')}
+function gdLogin(){gd('<h2 class="t">🔒 Dashboard Guru</h2><div class="box"><input type="password" id="gp" placeholder="PIN guru"><button class="act" onclick="gdPin()">Masuk</button><button class="act g" onclick="gdX()">Batal</button><p id="gm" style="color:var(--no)"></p></div>')}
 function gsv(){var t=G();t.nm=$('gn').value;t.nip=$('gi').value;Gs(t)}
 /* ABSENSI SISWA (nama & kelas terisi) */
 function dstr(t){var d=new Date(t);return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
@@ -416,13 +417,22 @@ function gdDet(i){GV='det';var it=LST[i],d=it.d,m=sm(d),f=it.f||{},rf=d.ref||{};
  h+='<div class="box"><h3>Umpan Balik Umum</h3><textarea id="fu">'+esc(f.u)+'</textarea><button class="act" onclick="gSave('+i+')">Kirim Umpan Balik</button><div class="msg" id="gm2"></div></div>';
  gd(h)}
 async function gSave(i){var it=LST[i],t=G(),f={};for(var j=0;j<6;j++){var v=$('fl'+j).value.trim();if(v)f['l'+j]=v}for(var q=0;q<10;q++){var w=$('fq'+q).value.trim();if(w)f['q'+q]=w}var u=$('fu').value.trim();if(u)f.u=u;
- try{await DB.doc('umpan/'+it.id).set({fb:f,g:t.nm,t:Date.now()});GU[it.id]={fb:f,g:t.nm};it.f=f;fb('gm2',true,'✅ Umpan balik terkirim otomatis ke siswa.')}catch(e){fb('gm2',false,'Gagal mengirim. Pastikan online dan dibuka dari akun pemilik/editor.')}}
+ try{await(GAS?gpost({a:'fb',pin:GP,key:it.id,fb:f,g:t.nm}):DB.doc('umpan/'+it.id).set({fb:f,g:t.nm,t:Date.now()}));GU[it.id]={fb:f,g:t.nm};it.f=f;fb('gm2',true,'✅ Umpan balik terkirim otomatis ke siswa.')}catch(e){fb('gm2',false,'Gagal mengirim. Pastikan online dan dibuka dari akun pemilik/editor.')}}
 async function gCsv(){lst();var c='Nama,Kelas,LKM selesai,Soal dijawab,Nilai evaluasi,LKPD terkirim,Refleksi terkirim\n'+LST.map(function(it){var m=sm(it.d);return [it.d.n,it.d.k,m.ln+'/6',m.q+'/10',m.sc,it.d.sl?'ya':'belum',it.d.sr?'ya':'belum'].map(function(x){return '"'+String(x).replace(/"/g,'""')+'"'}).join(',')}).join('\n');
  var r=await dlSave('rekap_pancasila.csv','\ufeff'+c);if(r)return;var x=$('gx');x.style.display='block';x.value=c;x.select()}
 function sendLk(){return snd('l','msl','LKPD')}
 function sendRef(){var q=ST.ref||{};if(!q.e||((q.a||'')+(q.b||'')).trim().length<5)return fb('msr',false,'Pilih emoji perasaan dan isi refleksimu dulu.');return snd('r','msr','Refleksi')}
-async function snd(k,mid,nm){if(!ST.n.trim()||!ST.k.trim())return fb(mid,false,'Isi nama dan kelas dulu di slide Identitas.');ST.sent[k]=Date.now();var ok=await push();if(ok){sv();fb(mid,true,'✅ '+nm+' terkirim ke guru.')}else{ST.sent[k]=0;fb(mid,false,'⚠️ Belum terhubung ke guru. Pastikan kamu online dan membuka aplikasi lewat tautan dari guru (sudah masuk akun), lalu coba lagi.')}}
+async function snd(k,mid,nm){if(!ST.n.trim()||!ST.k.trim())return fb(mid,false,'Isi nama dan kelas dulu di slide Identitas.');ST.sent[k]=Date.now();var ok=await push();if(ok){sv();fb(mid,true,'✅ '+nm+' terkirim ke guru.')}else{ST.sent[k]=0;fb(mid,false,'⚠️ Belum terkirim. '+await why())}}
+async function why(){try{if(GAS)return 'Koneksi bermasalah atau alamat Apps Script belum benar. Coba lagi.';if(!window.claude)return 'Buka lewat tautan dari guru, bukan file lokal.';var d=await claude.use('db');if(!d)return 'Kamu belum login. Masuk ke akunmu lalu buka lagi tautan dari guru.';var u=await claude.use('user');var w=u&&await u.can('data.write');if(w===false)return 'Akunmu hanya boleh melihat. Minta guru mengubah akses tautan menjadi Kontributor.';return 'Koneksi bermasalah. Pastikan online, lalu coba lagi.'}catch(e){return 'Koneksi bermasalah. Coba lagi.'}}
+window.addEventListener('online',function(){lastJ='';syncUp()});setInterval(function(){if(!SYNC&&ST.n&&ST.k&&UID){lastJ='';push()}},30000);
 $('sn').value=ST.n;$('sk').value=ST.k;
+/* GOOGLE APPS SCRIPT (rekap otomatis di GitHub Pages) */
+function gkey(){return (ST.n.trim()+'|'+ST.k.trim()).toLowerCase().replace(/\s+/g,' ')}
+async function gpost(b){var h={'Content-Type':'text/plain;charset=utf-8'},r;try{r=await fetch(GAS,{method:'POST',headers:h,body:JSON.stringify(b)})}catch(e){await fetch(GAS,{method:'POST',mode:'no-cors',headers:h,body:JSON.stringify(b)});return{ok:true}}var j=await r.json();if(!j.ok)throw 0;return j}
+async function gLoad(){var r=await fetch(GAS+'?a=list&pin='+encodeURIComponent(GP)).then(function(x){return x.json()});if(!r.ok)throw 0;GL={};GU={};r.rows.forEach(function(x){GL[x.key]=x.d;if(x.fb)GU[x.key]={fb:x.fb,g:x.g}});ED=true;DB=1}
+async function gdPin(){var p=$('gp').value;if(!GAS){if(p===PIN)gdMain();else $('gm').textContent='PIN salah';return}GP=p;$('gm').textContent='Memuat…';try{await gLoad();gdMain()}catch(e){$('gm').textContent='PIN salah atau belum terhubung ke Apps Script'}}
+async function gfb(){if(!GAS||!ST.n.trim()||!ST.k.trim())return;try{var r=await fetch(GAS+'?a=fb&key='+encodeURIComponent(gkey())).then(function(x){return x.json()});if(r&&r.ok){ST.fb=r.fb||null;ST.g=r.g||'';try{localStorage.setItem('pnc_st',JSON.stringify(ST))}catch(e){}showFb();if(S[cur].id==='mn')renderMenu()}}catch(e){}}
+if(GAS){setInterval(function(){var a=document.activeElement;if(ED&&GP&&GV==='main'&&$('gd').style.display==='block'&&!(a&&/INPUT|TEXTAREA|SELECT/.test(a.tagName)))gLoad().then(gdMain).catch(function(){})},20000);gfb();setInterval(gfb,60000);syncUp()}
 /* SWIPE */
 (function(){var x0,y0;var m=document.querySelector('main');
 m.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
