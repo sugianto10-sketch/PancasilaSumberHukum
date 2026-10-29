@@ -23,6 +23,22 @@ main{flex:1;min-height:0;padding:14px;display:flex;justify-content:center}
 .slide{display:none;width:100%;max-width:1100px;background:var(--card);border-radius:18px;box-shadow:0 8px 28px rgba(0,0,0,.08);padding:26px;overflow-y:auto;animation:up .2s ease}
 .slide.on{display:block}
 @keyframes up{from{opacity:0}to{opacity:1}}
+@keyframes inR{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
+@keyframes inL{from{opacity:0;transform:translateX(-36px)}to{opacity:1;transform:none}}
+@keyframes fxin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.slide.on.fwd{animation:inR .4s cubic-bezier(.22,.8,.3,1)}.slide.on.bak{animation:inL .4s cubic-bezier(.22,.8,.3,1)}
+.slide{scroll-behavior:smooth}.fx{animation:fxin .38s cubic-bezier(.22,.8,.3,1)}
+#mb ul,#mb ol{margin:6px 0 12px 22px}#mb li{margin-bottom:5px;font-size:1.05rem;line-height:1.6}#mb p{margin-bottom:8px}
+#mb h3.sb{color:var(--red);font-size:1.2rem;margin:14px 0 8px}:root[data-theme="dark"] #mb h3.sb{color:#ff8a80}
+.co{background:rgba(249,168,37,.14);border-left:5px solid var(--gold);padding:12px 16px;border-radius:8px;margin:12px 0;line-height:1.6}.co b{color:var(--red)}
+.tbl{width:100%;border-collapse:collapse;margin:8px 0 14px;font-size:.95rem}.tbl th,.tbl td{border:1px solid var(--line);padding:9px 11px;vertical-align:top;text-align:left}.tbl th{background:var(--red);color:#fff}
+.mnav{display:flex;justify-content:space-between;gap:8px;margin-top:18px}
+.tg{font-weight:800;color:var(--red);margin:14px 0 8px;font-size:.9rem;letter-spacing:.5px}
+.ti{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--soft);border:2px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px;color:var(--ink);transition:transform .25s,border-color .25s}
+.ti:hover{border-color:var(--red);transform:translateX(4px)}.ti .ic{font-size:1.5rem}.ti b{display:block;font-size:1rem}.ti small{color:var(--mut);font-size:.82rem}
+.dw{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .3s}.dw.on{opacity:1;pointer-events:auto}
+.dwi{width:min(88vw,380px);height:100%;background:var(--card);overflow-y:auto;padding:16px;transform:translateX(-100%);transition:transform .35s cubic-bezier(.22,.8,.3,1)}.dw.on .dwi{transform:none}
+.dwh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:1.1rem}
 h2.t{font-size:1.6rem;color:var(--dred);font-weight:800;margin-bottom:16px}
 :root[data-theme="dark"] h2.t{color:#ff8a80}
 p{font-size:1.05rem;line-height:1.65}
@@ -119,12 +135,31 @@ h2.t{font-size:1.3rem}p{font-size:1rem}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 .fbk{margin-top:12px;padding:12px 14px;border-radius:10px;background:#e8f0fe;color:#0d47a1;font-size:.95rem;line-height:1.5}.stt{margin:6px 0;font-weight:600}.act:disabled{cursor:not-allowed}.gd{display:none;position:fixed;inset:0;z-index:90;background:var(--bg);overflow:auto;padding:14px}.gdi{max-width:900px;margin:auto;padding-bottom:40px}label{display:block;font-weight:600;margin-top:8px}
+.ig{background:#fff;color:#2d3748;border-radius:16px;overflow:hidden;font-size:.95rem;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.igh{background:linear-gradient(135deg,#7f0000,#c62828 60%,#e53935);color:#fff;text-align:center;padding:22px 16px}.igh h2{font-size:1.5rem;font-weight:800;margin:8px 0}.igh small{color:#ffd7d7}
+.igh .tg2{display:inline-block;background:#f9a825;color:#4a2c00;font-weight:800;border-radius:99px;padding:3px 14px;font-size:.8rem}
+.igs{padding:16px;border-top:4px solid #f9a825;break-inside:avoid}.igs h3{color:#8e0000;font-size:1.15rem;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.igs h3 i{font-style:normal;background:#c62828;color:#fff;border-radius:50%;width:30px;height:30px;flex:none;display:grid;place-items:center;font-size:.95rem}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.g2i{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.c{background:#fff8e1;border:1px solid #ffe0a3;border-radius:10px;padding:10px;text-align:center;font-size:.85rem}.c b{display:block;color:#8e0000}.c span{font-size:1.6rem;display:block}
+.core{background:#c62828;color:#fff;border-radius:99px;padding:8px 24px;font-weight:800;text-align:center;margin:0 auto 10px;width:max-content;max-width:100%}
+.stp{color:#fff;padding:8px 14px;border-radius:8px;font-weight:700;margin:5px 0}.stp small{display:block;font-weight:400}
+.hk,.kw{border-radius:12px;padding:10px;font-size:.9rem}.hk{border:2px solid #2e7d32;background:#e8f5e9}.kw{border:2px solid #e65100;background:#fff3e0}.hk h4{color:#2e7d32}.kw h4{color:#e65100}
+.ig ul,.ig ol{margin:4px 0 0 18px}.ig li{margin-bottom:2px}
+.igt{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:8px}.igt th{background:#c62828;color:#fff;padding:6px;text-align:left}.igt td{border:1px solid #e2e8f0;padding:6px}
+.note{background:#fff8e1;border-left:5px solid #f9a825;border-radius:8px;padding:8px 12px;margin-top:10px;font-size:.88rem}
+.sc{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:800;margin-bottom:10px;font-size:1.1rem}.sc b{padding:6px 14px;border-radius:99px;color:#fff}
+.pr{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.pr div{background:#fdf2f2;border-radius:10px;padding:8px 10px;font-size:.88rem}
+.sumi{background:#fdf2f2}.igf{background:#c62828;color:#fff;text-align:center;padding:10px;font-size:.8rem}
+@media(max-width:680px){.g4,.pr{grid-template-columns:1fr 1fr}.g2i{grid-template-columns:1fr}}
+@media print{@page{size:A4;margin:8mm}html,body{height:auto!important;overflow:visible!important;display:block!important;background:#fff!important}body>*:not(main){display:none!important}main{display:block!important;padding:0!important;height:auto!important}.slide:not(#inf){display:none!important}#inf{display:block!important;box-shadow:none!important;padding:0!important;overflow:visible!important;animation:none!important;max-width:none!important}.igbtn{display:none!important}.ig{border-radius:0;font-size:10.5pt}.g4{grid-template-columns:repeat(4,1fr)}.g2i{grid-template-columns:1fr 1fr}.pr{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
 <div class="wm"></div>
 <header>
   <div class="brand">⚖️ Pendidikan Pancasila</div>
+  <button class="nb" onclick="td()">☰ Menu</button>
   <div class="nav"><button class="nb" onclick="go(-1)">← Sebelumnya</button><span id="ind">1 / 7</span><button class="nb" onclick="go(1)">Selanjutnya →</button></div>
 </header>
 <main>
@@ -152,15 +187,38 @@ h2.t{font-size:1.3rem}p{font-size:1rem}
   <div style="font-size:4.5rem">🧘‍♂️</div>
   <h2 class="t" style="margin-top:8px">Mari Mulai dengan Kesadaran</h2>
   <p>Tarik napas dalam-dalam… dan hembuskan perlahan. Siapkan dirimu untuk belajar hari ini.</p>
-  <div class="goals" style="text-align:left"><h3>🎯 Tujuan Pembelajaran</h3><ul>
-   <li>Memahami Pancasila sebagai sumber segala sumber hukum.</li>
-   <li>Menyusun urutan norma hukum di Indonesia.</li>
-   <li>Menganalisis keseimbangan hak dan kewajiban warga negara.</li>
-   <li><b>(Fokus Khusus)</b> Membedakan contoh hak dan kewajiban menggunakan kartu bergambar.</li></ul></div>
+  <div class="goals" style="text-align:left"><h3>🎯 Tujuan Pembelajaran</h3><ul><li>Menganalisis kedudukan Pancasila sebagai sumber segala sumber hukum di Indonesia melalui contoh tata tertib sekolah.</li><li>Menyusun urutan (hierarki) norma hukum Pancasila, UUD NRI 1945, UU, dan Perda secara benar.</li><li>Membedakan contoh hak dan kewajiban warga negara dalam kehidupan sehari-hari menggunakan kartu bergambar.</li><li>Menganalisis keseimbangan hak dan kewajiban dalam kehidupan bersama melalui kasus di sekolah.</li><li>Merumuskan komitmen nyata untuk menyeimbangkan hak dan kewajiban di lingkungan sekolah.</li></ul></div>
   <div class="trg t1" style="margin-top:20px;text-align:left">💡 Pemantik 1: Apa yang terjadi jika di sekolah setiap orang hanya menuntut haknya (ingin kelas bersih) tetapi tidak mau menjalankan kewajiban (piket)?</div>
   <div class="trg t2" style="text-align:left">💡 Pemantik 2: Mengapa semua aturan di Indonesia, dari undang-undang sampai tata tertib sekolah, harus bersumber dari Pancasila?</div>
  </div>
 </section>
+
+<!-- INFOGRAFIS -->
+<section class="slide" id="inf">
+<div class="igbtn" style="margin-bottom:12px"><button class="act" onclick="window.print()">🖨️ Cetak / Simpan PDF</button><button class="act g" onclick="go(1)">Lanjut ke Materi Utama →</button></div>
+<div class="ig">
+<div class="igh"><span class="tg2">INFOGRAFIS MATERI</span><h2>PANCASILA SUMBER SEGALA SUMBER HUKUM<br>&amp; KESEIMBANGAN HAK DAN KEWAJIBAN</h2><small>Pendidikan Pancasila • SMA Negeri 1 Sebuku • Fase E/F • Kurikulum Merdeka</small></div>
+<div class="igs"><h3><i>🎯</i>Tujuan Pembelajaran</h3><div class="pr"><div><b>1.</b> Menganalisis kedudukan Pancasila sebagai sumber segala sumber hukum.</div><div><b>2.</b> Menyusun urutan norma hukum secara benar.</div><div><b>3.</b> Membedakan contoh hak dan kewajiban dengan kartu bergambar.</div><div><b>4.</b> Menganalisis keseimbangan hak dan kewajiban melalui kasus.</div><div style="grid-column:1/-1"><b>5.</b> Merumuskan komitmen nyata menyeimbangkan hak dan kewajiban di sekolah.</div></div></div>
+<div class="igs"><h3><i>1</i>Pancasila: Sumber Segala Sumber Hukum</h3><div class="core">⚖️ PANCASILA</div>
+<p style="text-align:center;font-size:.9rem;margin-bottom:8px">Semua peraturan harus bersumber dari nilai Pancasila dan <b>tidak boleh bertentangan</b> dengannya.</p>
+<div class="g4"><div class="c"><span>🏛️</span><b>Dasar Negara</b>Landasan berdirinya NKRI</div><div class="c"><span>🧭</span><b>Pandangan Hidup</b>Pedoman perilaku warga</div><div class="c"><span>🌟</span><b>Ideologi Nasional</b>Cita-cita bernegara</div><div class="c"><span>📜</span><b>Sumber Hukum Tertinggi</b>Semua aturan mencerminkannya</div></div>
+<div class="note"><b>Contoh:</b> Tata tertib sekolah dibuat <b>adil</b>, <b>menghormati sesama</b>, dan <b>menjaga persatuan</b> (cerminan sila ke-2, ke-3, dan ke-5). Aturan yang bertentangan dengan Pancasila tidak sah dan harus diperbaiki. Peraturan boleh berganti, Pancasila <b>tidak dapat diganti</b>.</div></div>
+<div class="igs"><h3><i>2</i>Hierarki Norma Hukum</h3>
+<div class="stp" style="background:#b71c1c">1. Pancasila<small>Dasar negara & sumber tertinggi semua hukum</small></div><div style="margin-left:14px"><div class="stp" style="background:#d84315">2. UUD NRI Tahun 1945<small>Hukum dasar tertulis: struktur negara & hak warga negara</small></div></div><div style="margin-left:28px"><div class="stp" style="background:#ef6c00">3. Undang-Undang (UU)<small>Dibuat DPR bersama Presiden</small></div></div><div style="margin-left:42px"><div class="stp" style="background:#f9a825;color:#4a2c00">4. Peraturan Daerah (Perda)<small>Dibuat DPRD bersama kepala daerah</small></div></div>
+<div class="note">⬆️ Semakin ke atas, kedudukan semakin tinggi. Aturan lebih rendah <b>tidak boleh bertentangan</b> dengan yang lebih tinggi; jika bertentangan, <b>dapat dibatalkan</b>.<br><b>🧠 Contoh analisis:</b> Perda yang melarang warga beribadah menurut agamanya <b>cacat hukum</b> (bertentangan dengan sila ke-1 dan UUD 1945 Pasal 29) dan harus dibatalkan.</div></div>
+<div class="igs"><h3><i>3</i>Hak dan Kewajiban Warga Negara</h3><div class="g2i">
+<div class="hk"><h4>🎁 HAK</h4><b>Yang kita terima</b>, dilindungi negara/hukum.<ul><li>Mendapat pendidikan yang layak</li><li>Mendapat perlindungan hukum</li><li>Mendapat rasa aman</li><li>Kebebasan beribadah</li><li>Menggunakan fasilitas sekolah</li><li>Menyampaikan pendapat</li></ul></div>
+<div class="kw"><h4>🤝 KEWAJIBAN</h4><b>Yang harus kita lakukan</b> dengan tanggung jawab.<ul><li>Menaati tata tertib sekolah</li><li>Mengerjakan piket kelas</li><li>Menghormati hak orang lain</li><li>Menjaga kebersihan lingkungan</li><li>Membuang sampah pada tempatnya</li><li>Menaati hukum yang berlaku</li></ul></div></div>
+<div class="note"><b>📖 Dasar hukum:</b> UUD NRI 1945 — Pasal 27–34 (hak); Pasal 27 ayat (1), Pasal 28J ayat (1), Pasal 30 (kewajiban). Contoh: Pasal 31 ayat 1 (berhak mendapat pendidikan) dan ayat 2 (wajib mengikuti pendidikan dasar).</div></div>
+<div class="igs"><h3><i>4</i>Keseimbangan Hak dan Kewajiban</h3>
+<div class="sc"><b style="background:#2e7d32">🎁 HAK</b>⚖️<b style="background:#e65100">🤝 KEWAJIBAN</b></div>
+<p style="text-align:center;font-size:.9rem;margin-bottom:8px">Ibarat <b>dua sisi mata uang</b> — tidak dapat dipisahkan.</p>
+<div class="pr"><div><b>① Hak kita berakhir di mana hak orang lain dimulai.</b> Bebas berbicara, tetapi tidak mengganggu teman.</div><div><b>② Kewajiban lebih dulu, hak mengikuti.</b> Rajin belajar → nilai bagus.</div><div><b>③ Hak tidak boleh meniadakan kewajiban.</b> Berhak memakai fasilitas, wajib merawatnya.</div><div><b>④ Semua orang memiliki hak yang sama.</b> Tidak boleh merampas hak orang lain.</div></div>
+<table class="igt"><tr><th>Hak Siswa</th><th>Kewajiban yang Menyertai</th></tr><tr><td>Hak mendapat pendidikan</td><td>Mengikuti pelajaran dengan sungguh-sungguh</td></tr><tr><td>Hak mendapat rasa aman</td><td>Menghormati hak teman</td></tr><tr><td>Hak atas kelas yang bersih</td><td>Melaksanakan piket sesuai jadwal</td></tr><tr><td>Hak beribadah dengan tenang</td><td>Menghargai ibadah agama lain</td></tr></table>
+<div class="note"><b>🌟 Kesimpulan:</b> Warga negara yang baik <b>menjalankan kewajiban dengan ikhlas</b> dan <b>menggunakan hak dengan bijak</b> — wujud nyata pengamalan Pancasila.</div></div>
+<div class="igs sumi"><h3><i>📌</i>Ringkasan</h3><ul><li><b>Pancasila</b> = sumber segala sumber hukum.</li><li><b>Hierarki:</b> Pancasila → UUD NRI 1945 → UU → Perda.</li><li><b>Hak</b> = yang kita terima; <b>Kewajiban</b> = yang harus kita lakukan.</li><li>Hak dan kewajiban harus <b>seimbang</b>; kewajiban dijalankan lebih dulu.</li></ul></div>
+<div class="igf">SMA Negeri 1 Sebuku • Pendidikan Pancasila</div>
+</div></section>
 
 <!-- 3 MATERI -->
 <section class="slide">
@@ -208,6 +266,7 @@ h2.t{font-size:1.3rem}p{font-size:1rem}
 </main>
 
 <div class="gd" id="gd"></div>
+<div class="dw" id="dw"><div class="dwi"><div class="dwh"><b>☰ Daftar Isi</b><button class="act g" style="margin:0" onclick="dw(0)">✕</button></div><div id="dwb"></div></div></div>
 <script>
 /* STATE */
 var ST={n:'',k:'',in:{},r:{},qz:{},qw:{},fb:null,g:'',ref:{},sent:{}},curL=0,LN=['Urutkan Norma','Kartu Hak/Kewajiban','Jodohkan','Isian Rumpang','Analisis Kasus','Karya & Komitmen'];
@@ -218,25 +277,94 @@ function b64d(t){return JSON.parse(decodeURIComponent(escape(atob(t.trim()))))}
 function sm(d){var r=d.r||{},i=d.in||{},i5=Object.keys(i).some(function(k){return k.indexOf('5.')===0&&String(i[k]).length>=10}),l=[r.m1&&r.m1[0],r.m2&&/Hebat/.test(r.m2[1]),r.m3&&r.m3[0],r.m4&&r.m4[0],i5,r.m6&&r.m6[0]].map(Boolean),c=0,q=d.qz||{};for(var k in q)c+=+q[k]||0;return{l:l,ln:l.filter(Boolean).length,q:Object.keys(q).length,sc:c*10}}
 /* NAVIGASI */
 var cur=0,S=document.querySelectorAll('.slide');
-function show(){S.forEach(function(s,i){s.classList.toggle('on',i===cur)});document.getElementById('ind').textContent=(cur+1)+' / '+S.length;S[cur].scrollTop=0;if(S[cur].id==='mn')renderMenu()}
-function go(d){cur=Math.max(0,Math.min(S.length-1,cur+d));show()}
+var dir=1;
+function show(){S.forEach(function(s,i){s.classList.remove('fwd','bak');s.classList.toggle('on',i===cur)});var a=S[cur];void a.offsetWidth;a.classList.add(dir>=0?'fwd':'bak');document.getElementById('ind').textContent=(cur+1)+' / '+S.length;a.style.scrollBehavior='auto';a.scrollTop=0;a.style.scrollBehavior='';if(a.id==='mn')renderMenu()}
+function go(d){cur=Math.max(0,Math.min(S.length-1,cur+d));dir=d;show()}
 document.addEventListener('keydown',function(e){if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
 function $(i){return document.getElementById(i)}
 function shuf(a){return a.map(function(x){return[Math.random(),x]}).sort(function(a,b){return a[0]-b[0]}).map(function(x){return x[1]})}
+function fxa(box,body,i,init){var b=$(body),x=$(box);b.classList.remove('fx');void b.offsetWidth;b.classList.add('fx');var a=x.children[i];if(a&&x.scrollTo)x.scrollTo({left:Math.max(0,a.getBoundingClientRect().left-x.getBoundingClientRect().left+x.scrollLeft-24),behavior:'smooth'});if(!init){var s=x.closest('.slide');if(s&&s.scrollTo)s.scrollTo({top:0,behavior:'smooth'})}}
 function tabs(box,body,items){
   var h='';items.forEach(function(it,i){h+='<button class="tab" data-i="'+i+'">'+it[0]+'</button>'});
   $(box).innerHTML=h;
   $(box).onclick=function(e){var b=e.target.closest('.tab');if(!b)return;sel(+b.dataset.i)};
-  function sel(i){[].forEach.call($(box).children,function(c,j){c.classList.toggle('on',i===j)});$(body).innerHTML=items[i][1]();if(items[i][2])items[i][2]();if(box==='lt'){curL=i;restore();showFb()}}
-  sel(0);
+  function sel(i,init){[].forEach.call($(box).children,function(c,j){c.classList.toggle('on',i===j)});$(body).innerHTML=items[i][1]();fxa(box,body,i,init);if(items[i][2])items[i][2]();if(box==='lt'){curL=i;restore();showFb()}}
+  sel(0,1);return sel;
 }
 
-/* MATERI */
-tabs('mt','mb',[
- ['⚖️ Sumber Hukum',function(){return '<div class="box"><h3>Pancasila = “induk” semua aturan</h3><p>Pancasila adalah dasar negara dan sumber dari segala sumber hukum. Artinya, semua peraturan di Indonesia harus mencerminkan nilai-nilai Pancasila dan tidak boleh bertentangan dengannya.</p></div><div class="box"><h3>Contoh</h3><p>Tata tertib sekolah dibuat agar adil, menghormati sesama, dan menjaga persatuan. Itu mencerminkan nilai Pancasila.</p></div>'}],
- ['🪜 Urutan Norma',function(){return '<p>Semakin ke atas, kedudukan semakin tinggi. Aturan di bawah tidak boleh bertentangan dengan aturan di atasnya.</p><div class="stairs"><div style="background:#b71c1c">1. Pancasila</div><div style="background:#d84315;margin-left:14px">2. UUD NRI Tahun 1945</div><div style="background:#ef6c00;margin-left:28px">3. Undang-Undang (UU)</div><div style="background:#f9a825;color:#4a2c00;margin-left:42px">4. Peraturan Daerah (Perda)</div></div>'}],
- ['🎁🤝 Hak & Kewajiban',function(){return '<div class="grid2"><div class="box hak"><h3 style="color:var(--ok)">🎁 HAK</h3><p>Sesuatu yang kita terima: mendapat pendidikan, perlindungan hukum, rasa aman, dan kebebasan beribadah.</p></div><div class="box kew"><h3 style="color:#e65100">🤝 KEWAJIBAN</h3><p>Sesuatu yang harus kita lakukan: menaati tata tertib, menghormati hak orang lain, dan menjaga kebersihan.</p></div></div>'}],
- ['⚖️ Keseimbangan',function(){return '<div class="box"><h3>Hak dan kewajiban ibarat dua sisi timbangan</h3><p>Kelas bersih (hak) hanya terwujud jika semua menjalankan piket (kewajiban). Menuntut hak tanpa menjalankan kewajiban membuat aturan tidak adil dan hidup bersama menjadi tidak tertib.</p></div><div class="box"><h3>Ingat!</h3><p>Hak kita berakhir di mana hak orang lain dimulai. Karena itu, menghormati hak orang lain adalah kewajiban.</p></div>'}]
+/* MATERI + DAFTAR ISI */
+var MENU=[
+ {t:'Tujuan & Pemantik',d:'Apa yang akan kamu capai',e:'🎯',m:1},
+ {t:'1. Pancasila sebagai Sumber Segala Sumber Hukum',d:'Fungsi & contoh penerapan',e:'⚖️',m:2},
+ {t:'2. Urutan (Hierarki) Norma Hukum',d:'Pancasila → UUD → UU → Perda',e:'🪜',m:3},
+ {t:'3. Hak dan Kewajiban Warga Negara',d:'Pengertian, contoh, dasar hukum',e:'🎁',m:4},
+ {t:'4. Keseimbangan Hak dan Kewajiban',d:'Prinsip & contoh nyata di sekolah',e:'🤝',m:5},
+ {t:'Ringkasan Materi',d:'Poin-poin penting',e:'📌',m:6}
+],
+EXTRA=[
+ {t:'Lembar Kerja Interaktif',d:'6 aktivitas',e:'📝',s:5},
+ {t:'Refleksi Pembelajaran',d:'Perasaan & komitmen',e:'✨',s:7},
+ {t:'Sertifikat & Hasil Belajar',d:'Unduh setelah semua selesai',e:'🎓',s:8}
+],
+START=[{t:'Sampul',e:'🏠',s:0},{t:'Identitas Siswa',e:'👋',s:1},{t:'Mari Mulai',d:'Tujuan & pemantik',e:'🧘',s:2},{t:'Infografis Materi',d:'Ringkasan visual • bisa dicetak',e:'🗺️',s:3}],
+EVAL=[{t:'Evaluasi Pemahaman',e:'🧠',s:6,ev:1}],
+END=[{t:'Pesan Penyemangat',e:'🌙',s:9}];
+function ti(o){var k=o.s!=null?'s':'m',d=o.ev?'10 soal • dikerjakan '+sm(ST).q+'/10':(o.d||'');return '<button class="ti" data-'+k+'="'+o[k]+'"><span class="ic">'+o.e+'</span><span><b>'+o.t+'</b><small>'+d+'</small></span></button>'}
+function tocHtml(full){var l=function(a){return a.map(ti).join('')};return (full?'<div class="tg">Awal</div>'+l(START):'<div class="tg">🗺️ Infografis</div>'+ti(START[3]))+'<div class="tg">📚 Materi Utama</div>'+l(MENU)+'<div class="tg">🎯 Kegiatan Belajar</div>'+l(EXTRA)+(full?'<div class="tg">🧠 Evaluasi</div>'+l(EVAL)+l(END):'')}
+function nv(i){return '<div class="mnav">'+(i>0?'<button class="act g" onclick="selMat('+(i-1)+')">← Sebelumnya</button>':'<span></span>')+(i<6?'<button class="act" onclick="selMat('+(i+1)+')">Berikutnya →</button>':'')+'</div>'}
+function dw(o){$('dw').classList.toggle('on',!!o)}
+function td(){var d=$('dw');if(!d.classList.contains('on'))$('dwb').innerHTML=tocHtml(1);d.classList.toggle('on')}
+function goTo(i){dir=i>=cur?1:-1;cur=i;show();dw(0)}
+document.addEventListener('click',function(e){var t=e.target.closest('.ti');if(t){if(t.dataset.s!=null)goTo(+t.dataset.s);else{goTo(4);selMat(+t.dataset.m)}return}if(e.target.id==='dw')dw(0)});
+var selMat=tabs('mt','mb',[
+ ['📑 Daftar Isi',function(){return '<p style="margin-bottom:12px">Pilih bagian yang ingin kamu pelajari. Semua berpindah dengan mulus dan kamu bisa kembali ke daftar ini kapan saja.</p>'+tocHtml(0)}],
+ ['🎯 Tujuan',function(){return `<div class="goals" style="margin-top:0"><h3>🎯 Tujuan Pembelajaran</h3><ol><li>Menganalisis kedudukan Pancasila sebagai sumber segala sumber hukum di Indonesia melalui contoh tata tertib sekolah.</li><li>Menyusun urutan (hierarki) norma hukum Pancasila, UUD NRI 1945, UU, dan Perda secara benar.</li><li>Membedakan contoh hak dan kewajiban warga negara dalam kehidupan sehari-hari menggunakan kartu bergambar.</li><li>Menganalisis keseimbangan hak dan kewajiban dalam kehidupan bersama melalui kasus di sekolah.</li><li>Merumuskan komitmen nyata untuk menyeimbangkan hak dan kewajiban di lingkungan sekolah.</li></ol></div>
+<div class="trg t1" style="margin-top:16px">💡 Pemantik 1 — Apa yang terjadi jika di sekolah setiap orang hanya menuntut haknya (ingin kelas bersih) tetapi tidak mau menjalankan kewajiban (piket)?</div>
+<div class="trg t2">💡 Pemantik 2 — Mengapa semua aturan di Indonesia, dari undang-undang sampai tata tertib sekolah, harus bersumber dari Pancasila?</div>`+nv(1)}],
+ ['⚖️ 1 Sumber Hukum',function(){return `<h3 class="sb">⚖️ 1. Pancasila sebagai Sumber Segala Sumber Hukum</h3>
+<p>Pancasila bukan hanya dasar negara, tetapi juga <b>sumber dari segala sumber hukum</b>. Artinya, semua peraturan perundang-undangan yang berlaku di Indonesia — mulai dari UUD, undang-undang, peraturan pemerintah, hingga peraturan daerah dan tata tertib sekolah — <b>harus bersumber dari nilai-nilai Pancasila dan tidak boleh bertentangan dengannya</b>.</p>
+<h3 class="sb">Fungsi Pancasila dalam Bidang Hukum</h3>
+<ul><li><b>Sebagai dasar negara</b> — menjadi landasan berdirinya Negara Kesatuan Republik Indonesia.</li>
+<li><b>Sebagai pandangan hidup bangsa</b> — menjadi pedoman perilaku warga negara.</li>
+<li><b>Sebagai ideologi nasional</b> — menjadi cita-cita dan tujuan bernegara.</li>
+<li><b>Sebagai sumber hukum tertinggi</b> — semua peraturan harus mencerminkan nilai Pancasila.</li></ul>
+<h3 class="sb">Contoh Penerapan</h3>
+<p>Tata tertib sekolah dibuat agar <b>adil</b>, <b>menghormati sesama</b>, dan <b>menjaga persatuan</b>. Ketiga nilai itu merupakan cerminan langsung dari sila ke-2, ke-3, dan ke-5 Pancasila. Jika ada aturan sekolah yang bertentangan dengan nilai Pancasila, maka aturan itu tidak sah dan harus diperbaiki.</p>
+<div class="co"><b>🔑 Ingat!</b> Peraturan boleh berganti, tetapi Pancasila tetap menjadi <b>sumber utama</b> dan <b>tidak dapat diganti</b> karena ia adalah dasar negara yang disepakati oleh seluruh bangsa.</div>`+nv(2)}],
+ ['🪜 2 Urutan Norma',function(){return `<h3 class="sb">🪜 2. Urutan (Hierarki) Norma Hukum di Indonesia</h3>
+<p>Norma hukum di Indonesia tersusun <b>bertingkat</b>. Semakin ke atas, kedudukannya <b>semakin tinggi</b>. Aturan yang lebih rendah <b>tidak boleh bertentangan</b> dengan aturan yang lebih tinggi. Jika bertentangan, aturan yang lebih rendah <b>dapat dibatalkan</b>.</p>
+<div class="stairs"><div style="background:#b71c1c">1. Pancasila</div><div style="background:#d84315;margin-left:14px">2. UUD NRI Tahun 1945</div><div style="background:#ef6c00;margin-left:28px">3. Undang-Undang (UU)</div><div style="background:#f9a825;color:#4a2c00;margin-left:42px">4. Peraturan Daerah (Perda)</div></div>
+<h3 class="sb">Penjelasan Singkat</h3>
+<table class="tbl"><tr><th style="width:32%">Norma</th><th>Penjelasan</th></tr>
+<tr><td><b>Pancasila</b></td><td>Dasar negara dan sumber tertinggi dari semua hukum di Indonesia.</td></tr>
+<tr><td><b>UUD NRI 1945</b></td><td>Hukum dasar tertulis yang mengatur struktur negara dan hak-hak warga negara.</td></tr>
+<tr><td><b>Undang-Undang (UU)</b></td><td>Dibuat oleh DPR bersama Presiden untuk mengatur kehidupan berbangsa.</td></tr>
+<tr><td><b>Peraturan Daerah (Perda)</b></td><td>Dibuat oleh DPRD bersama kepala daerah untuk mengatur urusan daerah.</td></tr></table>
+<div class="co"><b>🧠 Contoh analisis:</b> Jika sebuah Perda melarang warga beribadah menurut agamanya, maka Perda itu <b>cacat hukum</b> karena bertentangan dengan Pancasila (sila ke-1) dan UUD 1945 (Pasal 29). Perda tersebut harus dibatalkan.</div>`+nv(3)}],
+ ['🎁 3 Hak & Kewajiban',function(){return `<h3 class="sb">🎁🤝 3. Hak dan Kewajiban Warga Negara</h3>
+<div class="grid2"><div class="box hak"><h3 style="color:var(--ok)">🎁 HAK</h3><p><b>Pengertian:</b> Sesuatu yang <b>kita terima</b> dan dilindungi oleh negara/hukum.</p><p><b>Contoh:</b></p><ul><li>Mendapat pendidikan yang layak</li><li>Mendapat perlindungan hukum</li><li>Mendapat rasa aman</li><li>Kebebasan beribadah</li><li>Menggunakan fasilitas sekolah</li><li>Menyampaikan pendapat</li></ul></div>
+<div class="box kew"><h3 style="color:#e65100">🤝 KEWAJIBAN</h3><p><b>Pengertian:</b> Sesuatu yang <b>harus kita lakukan</b> dengan penuh tanggung jawab.</p><p><b>Contoh:</b></p><ul><li>Menaati tata tertib sekolah</li><li>Mengerjakan piket kelas</li><li>Menghormati hak orang lain</li><li>Menjaga kebersihan lingkungan</li><li>Membuang sampah pada tempatnya</li><li>Menaati hukum yang berlaku</li></ul></div></div>
+<div class="co"><b>📖 Dasar Hukum:</b> Hak dan kewajiban warga negara diatur dalam <b>UUD NRI 1945</b>, khususnya Pasal 27–34 (hak) dan Pasal 27 ayat (1), Pasal 28J ayat (1), Pasal 30 (kewajiban). Contoh: <i>“Setiap warga negara berhak mendapat pendidikan”</i> (Pasal 31 ayat 1) dan <i>“Setiap warga negara wajib mengikuti pendidikan dasar”</i> (Pasal 31 ayat 2).</div>`+nv(4)}],
+ ['🤝 4 Keseimbangan',function(){return `<h3 class="sb">⚖️ 4. Keseimbangan Hak dan Kewajiban</h3>
+<p>Hak dan kewajiban ibarat <b>dua sisi mata uang</b> — tidak dapat dipisahkan. Ketika kita menuntut hak, kita juga harus menjalankan kewajiban. Kelas yang bersih (hak) hanya terwujud jika <b>semua</b> siswa melaksanakan piket (kewajiban).</p>
+<h3 class="sb">Prinsip-Prinsip Keseimbangan</h3>
+<ol><li><b>Hak kita berakhir di mana hak orang lain dimulai.</b> Kita bebas berbicara, tetapi tidak boleh mengganggu ketenangan teman.</li>
+<li><b>Kewajiban dijalankan lebih dulu, hak akan mengikuti.</b> Contoh: Rajin belajar (kewajiban) → mendapat nilai bagus (hak).</li>
+<li><b>Hak tidak boleh meniadakan kewajiban.</b> Kita berhak menggunakan fasilitas sekolah, tetapi wajib merawatnya.</li>
+<li><b>Semua orang memiliki hak yang sama.</b> Tidak ada yang boleh merampas hak orang lain demi hak pribadi.</li></ol>
+<h3 class="sb">Contoh Nyata di Sekolah</h3>
+<table class="tbl"><tr><th style="width:50%">Hak Siswa</th><th>Kewajiban yang Menyertai</th></tr>
+<tr><td>Hak mendapat pendidikan</td><td>Mengikuti pelajaran dengan sungguh-sungguh</td></tr>
+<tr><td>Hak mendapat rasa aman</td><td>Menghormati hak teman</td></tr>
+<tr><td>Hak atas kelas yang bersih</td><td>Melaksanakan piket sesuai jadwal</td></tr>
+<tr><td>Hak beribadah dengan tenang</td><td>Menghargai ibadah agama lain</td></tr></table>
+<div class="co"><b>🌟 Kesimpulan:</b> Warga negara yang baik adalah yang <b>menjalankan kewajiban dengan ikhlas</b> dan <b>menggunakan hak dengan bijak</b>. Inilah wujud nyata pengamalan Pancasila dalam kehidupan sehari-hari.</div>`+nv(5)}],
+ ['📌 Ringkasan',function(){return `<h3 class="sb">📌 Ringkasan Materi</h3>
+<ul><li><b>Pancasila</b> adalah sumber dari segala sumber hukum — semua aturan di Indonesia wajib bersumber dan tidak boleh bertentangan dengannya.</li>
+<li><b>Hierarki norma:</b> Pancasila → UUD NRI 1945 → UU → Perda. Aturan yang lebih rendah tidak boleh bertentangan dengan yang lebih tinggi.</li>
+<li><b>Hak</b> = yang kita terima. <b>Kewajiban</b> = yang harus kita lakukan.</li>
+<li>Hak dan kewajiban harus <b>seimbang</b>. Menuntut hak tanpa kewajiban menimbulkan ketidakadilan.</li>
+<li>Warga negara yang baik <b>menjalankan kewajiban</b> lebih dulu sebelum <b>menuntut hak</b>.</li></ul>`+nv(6)}]
 ]);
 
 /* LKM */
